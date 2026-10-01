@@ -1,0 +1,654 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masria | Portofolio Atlet Bulutangkis</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-red: #d32f2f;
+            --dark-red: #b71c1c;
+            --white: #ffffff;
+            --dark: #1a1a1a;
+            --light-gray: #f9f9f9;
+            --text-gray: #555555;
+            --gold: #FFD700;
+            --silver: #C0C0C0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: var(--white);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav.scrolled {
+            padding: 12px 8%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-red);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Burger Menu */
+        .burger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 5px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1599586120429-48281b6f0ece?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+        }
+
+        .hero-content {
+            color: var(--white);
+            max-width: 800px;
+            z-index: 2;
+            margin-top: 60px; /* Offset for navbar */
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-red);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 35px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background-color: var(--primary-red);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-red);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.6);
+        }
+
+        /* General Sections */
+        section {
+            padding: 100px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-red);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Profil Section */
+        .profil {
+            background-color: var(--white);
+        }
+
+        .profil-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profil-img {
+            flex: 1;
+            position: relative;
+        }
+
+        .profil-img img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profil-img::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 5px solid var(--primary-red);
+            top: 20px;
+            left: 20px;
+            border-radius: 15px;
+            z-index: 1;
+        }
+
+        .profil-text {
+            flex: 1;
+        }
+
+        .profil-text h3 {
+            font-size: 2rem;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+
+        .profil-text p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Prestasi Section */
+        .prestasi {
+            background-color: var(--light-gray);
+        }
+
+        .prestasi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--primary-red);
+        }
+
+        .card i {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+        }
+
+        .gold { color: var(--gold); }
+        .silver { color: var(--silver); }
+        .bronze { color: #cd7f32; }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Galeri Section */
+        .galeri {
+            background-color: var(--white);
+        }
+
+        .galeri-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .galeri-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .galeri-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .galeri-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .galeri-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(211, 47, 47, 0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .galeri-item:hover .galeri-overlay {
+            opacity: 1;
+        }
+
+        .galeri-overlay span {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 20px 30px;
+        }
+
+        footer h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .sosmed {
+            margin-bottom: 40px;
+        }
+
+        .sosmed a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            background-color: rgba(255,255,255,0.1);
+            color: var(--white);
+            border-radius: 50%;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .sosmed a:hover {
+            background-color: var(--primary-red);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 992px) {
+            .profil-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profil-img::before {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            nav {
+                padding: 15px 5%;
+            }
+            
+            nav.scrolled {
+                padding: 15px 5%;
+            }
+
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100vh;
+                width: 70%;
+                background-color: var(--white);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(100%);
+                transition: transform 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-links li {
+                margin: 25px 0;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+
+            .nav-active {
+                transform: translateX(0%);
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .toggle .line2 {
+                opacity: 0;
+            }
+
+            .toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <nav id="navbar">
+        <a href="#" class="logo">Masria<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#profil">Profil</a></li>
+            <li><a href="#prestasi">Prestasi</a></li>
+            <li><a href="#galeri">Galeri</a></li>
+        </ul>
+        <div class="burger" aria-label="Toggle Navigation">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Halo, Saya <span>Masria</span></h1>
+            <p>Atlet Bulutangkis Kebanggaan Tolitoli</p>
+            <a href="#prestasi" class="btn">Lihat Prestasi</a>
+        </div>
+    </section>
+
+    <!-- Profil Section -->
+    <section id="profil" class="profil">
+        <h2 class="section-title">Profil Saya</h2>
+        <div class="profil-container">
+            <div class="profil-img">
+                <img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=800&q=80" alt="Masria Atlet Bulutangkis">
+            </div>
+            <div class="profil-text">
+                <h3>Dedikasi Merah Putih dari Tolitoli</h3>
+                <p>Lahir dan besar di <strong>Tolitoli, Indonesia</strong>, saya telah mengenal dunia bulutangkis sejak usia dini. Ketertarikan yang bermula dari hobi kini berubah menjadi dedikasi profesional. Mengayunkan raket dan membawa nama baik daerah di berbagai kejuaraan adalah kebanggaan terbesar saya.</p>
+                <p>Didukung oleh semangat juang layaknya pahlawan olahraga Indonesia, fokus, disiplin, dan pantang menyerah adalah prinsip dasar saya dalam setiap pertandingan maupun sesi latihan untuk terus meraih medali emas.</p>
+                <a href="#galeri" class="btn" style="margin-top: 15px;">Lihat Aksi di Lapangan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prestasi Section -->
+    <section id="prestasi" class="prestasi">
+        <h2 class="section-title">Daftar Prestasi</h2>
+        <div class="prestasi-grid">
+            <div class="card">
+                <i class="fas fa-medal gold"></i>
+                <h3>Medali Emas</h3>
+                <p>Pekan Olahraga Provinsi (PORPROV) Sulawesi Tengah - Kategori Tunggal Putri.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-trophy gold"></i>
+                <h3>Juara 1</h3>
+                <p>Kejuaraan Bulutangkis Terbuka se-Kabupaten Tolitoli.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-medal silver"></i>
+                <h3>Juara 2</h3>
+                <p>Sirkuit Nasional (Sirnas) Regional Sulawesi - Tingkat Nasional.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-trophy gold"></i>
+                <h3>Juara 1</h3>
+                <p>Bupati Cup Tolitoli - Kategori Ganda Putri.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Section -->
+    <section id="galeri" class="galeri">
+        <h2 class="section-title">Galeri Momen</h2>
+        <div class="galeri-grid">
+            <div class="galeri-item">
+                <img src="https://images.unsplash.com/photo-1582231572970-202237070119?auto=format&fit=crop&w=800&q=80" alt="Pertandingan Bulutangkis">
+                <div class="galeri-overlay"><span>Smash Keras</span></div>
+            </div>
+            <div class="galeri-item">
+                <img src="https://images.unsplash.com/photo-1613918431703-b09b555776d6?auto=format&fit=crop&w=800&q=80" alt="Fokus Pertandingan">
+                <div class="galeri-overlay"><span>Fokus & Konsentrasi</span></div>
+            </div>
+            <div class="galeri-item">
+                <img src="https://images.unsplash.com/photo-1628282054238-ebbc2fbf6ec2?auto=format&fit=crop&w=800&q=80" alt="Peralatan Bulutangkis">
+                <div class="galeri-overlay"><span>Persiapan Matang</span></div>
+            </div>
+            <div class="galeri-item">
+                <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80" alt="Raket dan Shuttlecock">
+                <div class="galeri-overlay"><span>Senjata Andalan</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2>Dukung Terus Langkah Saya!</h2>
+        <p>Mari terhubung dan dukung kemajuan olahraga bulutangkis Indonesia.</p>
+        <div class="sosmed">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p class="copyright">&copy; 2026 Masria. Bangga dari Tolitoli untuk Indonesia.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle logic
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+
+            burger.addEventListener('click', () => {
+                // Toggle Navigation Menu
+                nav.classList.toggle('nav-active');
+
+                // Animate Burger Icon to X
+                burger.classList.toggle('toggle');
+            });
+
+            // Close mobile menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('nav-active');
+                    burger.classList.remove('toggle');
+                });
+            });
+
+            // Sticky Navbar Shadow on Scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
